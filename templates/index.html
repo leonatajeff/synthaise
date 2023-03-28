@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Similar Audio Files</title>
+</head>
+<body>
+    <h1>Find Similar Audio Files</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <form method="post" action="/">
+        <label for="input_text">Enter a keyword:</label>
+        <input type="text" id="input_text" name="input_text">
+        <button type="submit">Search</button>
+    </form>
+    {% if results %}
+    <h2>Results:</h2>
+    {% for file_name, file_path in results %}
+        <h3>{{ file_name }}</h3>
+        <audio controls>
+            <source src="{{ file_path }}" type="audio/wav">
+            Your browser does not support the audio tag.
+        </audio>
+    {% endfor %}
+{% endif %}
+
+</body>
+</html>
