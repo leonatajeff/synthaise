@@ -17,15 +17,15 @@ The dataset used in this project can be downloaded from Kaggle at the following 
 5. Create a folder `audio-files`, this is where the results will be locally stored.
 
 synthaise/
-├─ client/
+│
 ├─ templates/
 ├─ static/
 ├─ app.py
-├─ UrbanSound8K/
-├─ audio_files/
 ├─ .gitignore
-└─ README.md
-
+├─ README.md
+└─ UrbanSound8K/
+    ├─ audio/
+    └─ metadata/
 
 ## Running the Flask app locally
 
@@ -64,5 +64,3 @@ On macOS and Linux:
 ```bash
 export FLASK_APP=app.py
 ```
-
-
