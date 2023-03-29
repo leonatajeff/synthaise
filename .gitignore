@@ -1,0 +1,46 @@
+# .gitignore
+
+# Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+*.egg
+*.log
+*.pot
+*.pyc
+*.pyo
+*.mo
+*.so
+
+# Virtual Environment
+venv/
+.env
+*.env
+
+# Flask specific
+instance/
+
+# IDEs and editors
+.vscode/
+*.swp
+*.swo
+*.swn
+*.idea/
+
+# Urbansound8k dataset, keep it local.
+urbansound8k/
+audio_files
+
+# Logs
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
