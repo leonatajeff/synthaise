@@ -23,6 +23,7 @@ synthaise/
 ├─ app.py
 ├─ .gitignore
 ├─ README.md
+├─ audio-files/
 └─ UrbanSound8K/
     ├─ audio/
     └─ metadata/
