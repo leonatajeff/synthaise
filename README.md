@@ -16,17 +16,18 @@ The dataset used in this project can be downloaded from Kaggle at the following 
 4. Place the extracted `UrbanSound8K` folder inside your local repository of the Flask app. The final structure should look like this:
 5. Create a folder `audio-files`, this is where the results will be locally stored.
 
-synthaise/
-│
-├─ templates/
-├─ static/
-├─ app.py
-├─ .gitignore
-├─ README.md
-├─ audio-files/
-└─ UrbanSound8K/
-    ├─ audio/
-    └─ metadata/
+- synthaise/
+  - templates/
+  - static/
+  - app.py
+  - .gitignore
+  - README.md
+  - audio-files/
+  - urbansound8k/
+    - audio/
+    - metadata/
+        - UrbanSound8K.csv
+
 
 ## Running the Flask app locally
 
