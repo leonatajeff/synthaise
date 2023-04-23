@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, render_template_string, send_file
 import pandas as pd
 import numpy as np
 import os
@@ -19,7 +19,7 @@ def preprocess_text(text):
     text = nltk.word_tokenize(text)
     return text
 
-df = pd.read_csv('./urbansound8k/UrbanSound8K.csv')
+df = pd.read_csv('./static/UrbanSound8K.csv')
 class_column = df['class']
 audio_names = class_column.tolist()
 class_to_filename = dict(zip(df['class'], df['slice_file_name']))
@@ -41,6 +41,7 @@ words = list(model.wv.key_to_index)
 
 
 def get_similar_words(input_text, topn=3):
+    print("Running get_similar_words")
     input_words = preprocess_text(input_text)
     
     class_scores = {class_name: 0 for class_name in set(df['class'])}
@@ -77,10 +78,27 @@ def index():
     if request.method == 'POST':
         input_text = request.form['input_text']
         similar_files = get_similar_words(input_text, topn=3)
-        return render_template('index.html', results=similar_files)
+
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            results_template = '''
+            {% if results %}
+            <h2>Results:</h2>
+            {% for file_name, file_path in results %}
+                <h3>{{ file_name }}</h3>
+                <audio controls>
+                    <source src="{{ file_path }}" type="audio/wav">
+                    Your browser does not support the audio tag.
+                </audio>
+            {% endfor %}
+            {% endif %}
+            '''
+            return render_template_string(results_template, results=similar_files)
+        else:
+            return render_template('index.html', results=similar_files)
+
     else:
         return render_template('index.html')
-    
+
 # Define route for serving audio files
 @app.route('/audio_files/<path:file_path>')
 def get_audio(file_path):

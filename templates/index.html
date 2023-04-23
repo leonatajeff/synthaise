@@ -11,12 +11,31 @@
 </head>
 <body>
     <script>
-        function showDiv() {
+        function showDiv(event) {
+            event.preventDefault();
+    
+            // Show the loader
             document.getElementById('loader').style.display = "block";
-            setTimeout(function() {
-                document.getElementById('loader').style.display = "none";
-                document.getElementById('content').style.display = "block";
-            }, 5000);
+    
+            // Get the input_text value
+            var input_text = document.getElementById('input_text').value;
+    
+            // Send the form data using AJAX
+            $.ajax({
+                url: '/',
+                type: 'POST',
+                data: { input_text: input_text },
+                success: function(response) {
+                    // Hide the loader
+                    document.getElementById('loader').style.display = "none";
+    
+                    // Update the content div with the new results
+                    document.getElementById('content').innerHTML = response;
+    
+                    // Show the content div
+                    document.getElementById('content').classList.add('show');
+                }
+            });
         }
     </script>
     <h1>Find Similar Audio Files</h1>
@@ -25,15 +44,15 @@
     {% endif %}
     <div class="input-container">
     <form action="#" class="form" method="post">
-        <input class="input" placeholder='Describe your sound....'></input>
-        <button class="generate-btn" id="generate" type="button" onclick="showDiv()"> Generate </button>
+        <input class="input" id="input_text" name="input_text" placeholder='Describe your sound....'></input>
+        <button class="generate-btn" id="generate" type="submit" onclick="showDiv(event)"> Generate </button>
     </form>
     </div>
     <div class="loading" id="loader" style="display: none;">
         <h2> Generating </h2>
         <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
-    <div id="content" style="display: none;">
+    <div id="content">
         {% if results %}
         <h2>Results:</h2>
         {% for file_name, file_path in results %}

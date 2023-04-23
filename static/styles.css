@@ -56,6 +56,14 @@ div#content {
   display: none;
 }
 
+#content {
+  display: none;
+}
+
+#content.show {
+  display: block;
+}
+
 div#loading {
   top: 200 px;
   margin: auto;
