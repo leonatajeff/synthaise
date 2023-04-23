@@ -42,6 +42,7 @@ words = list(model.wv.key_to_index)
 
 def get_similar_words(input_text, topn=3):
     print("Running get_similar_words")
+    print(str(input_text))
     input_words = preprocess_text(input_text)
     
     class_scores = {class_name: 0 for class_name in set(df['class'])}
